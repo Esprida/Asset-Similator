@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+	<title>Esprida Agent Registration</title>
+	<script src="scripts/jquery-3.0.0.js"></script>
+	<script src="scripts/Registration_MsgCall.js"></script>
+	<script src="scripts/livecontrol_gateway.js"></script>
+	<script src="scripts/Send_Metrics.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "style.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+ </head>
+
+<body>
+    <div class="image">
+	<header>
+		<h3>Live Intersect</h3><h1>Agent Simulator - API's Integration</h1>
+	</header>
+	</div>
+    <div class = "Reg" >
+	<div id = "agentregister" style="border:1px">
+		<h5><b>Agent :</b> Register</h5>
+
+		<table class = "mandate" style="padding-left:100px;">
+			<tr>
+				<td align = "left"> URL   <b>:</b> </td>
+				<td width="60%"><input type="text" id="AgentURL" name="URL" size="30" placeholder="URL" autocomplete="on"></td>
+            </tr>
+            <tr><td style="color:red;" id = "alert"></td> </tr>
+
+		</table>
+	</div>
+
+	<div id="registerdetails">
+		<h4> Registration Details
+            <span style="float:right;" >
+			Advanced Options &nbsp; <span class="toggle"><button></button>
+		</span>
+	    </span>
+        </h4>
+
+
+		<table class="mandate2" style="padding-left:100px;">
+			<tr>
+				<td align="left">API Key  <b>:</b></td>
+				<td width="60%"><input type="text" id="apiKey" name="APIKey" size="30" placeholder="API Key"  autocomplete="on"></td>
+			</tr>
+            <tr><td style="color:red;" id = "alert2"></td> </tr>
+			<tr>
+				<td align="left">Serial Number  <b>:</b></td>
+				<td width="60%"><input type="text" id="SrNo" name="SrNo" size="30"  placeholder="Serial number" autocomplete="on"></td>
+			</tr>
+            <tr><td style="color:red;" id = "alert3"></td> </tr>
+		</table> <br>
+	</div>
+	
+	<div  id="optional">
+		<table class="option" style="padding-left:100px;">
+			<tr>
+				<td align="left">Asset Name    <b>:</b> </td>
+				<td width="60%"><input type="text" id="assetname" name="AssetName" size="30"  placeholder="Asset Name"  autocomplete="on"></td>
+			</tr>
+
+			<tr>
+				<td align="left">Asset Type Code    <b>:</b></td>
+				<td width="60%"><input type="text" id="assettype" name="AssetTypeCode" size="30"  placeholder="AssetTypeCode" autocomplete="on"></td>
+			</tr>	
+			
+			<tr>
+				<td align="left">TimeZone Id   <b>:</b></td>
+				<td width="60%"><input type="text" id="timezone" name="Timezone" size="30" placeholder="TimeZone" autocomplete="on"></td>
+			</tr>
+				
+		</table> <br>
+	</div>
+
+	<div>
+			<button id ="registerAsset" type="submit">Register Asset</button>
+	         <br> <br>
+
+			<h4>Agent Register Metric Response - JSON</h4>
+
+			&nbsp; &nbsp; <textarea id="agentResponse" rows="7" cols="57"></textarea> <br><br>
+			
+			&nbsp; <button id="save">Save Response</button>
+			<button id="Registerfiddle">JSFiddle</button>
+	</div> <br>
+    </div> <br>
+	<!--   Send Metric Page -->
+    <div class="met">
+	<div id="agentmetrics">	
+		<br><h5><b>Agent :</b> Asset Metrics </h5> <br>
+		<table class="mandate3" style="padding-left:100px;">
+			<tr>
+				<td align="left">URL <b>:</b></td>
+				<td width="60%"><input type="text" id="MetricURL" size="30" placeholder="URL" autocomplete="on"></td>
+			</tr>
+            <tr><td style="color:red;" id = "alert4"></td> </tr>
+		</table>
+	</div>
+
+	<div id="metrics">
+		<h4>Asset Metrics</h4>
+		<table class="mandate4" style="padding-left:100px;">
+			<tr>
+				<td align="left">Asset Login <b>:</b></td>
+				<td width="60%"><input type="text" id="assetlogin" size="30" placeholder="Asset login" autocomplete="on"></td>
+			</tr>
+            <tr><td style="color:red;" id = "alert5"></td> </tr>
+			<tr>
+				<td align="left">Metric Code <b>:</b></td>
+				<td width="60%"><input type="text"  id="metriccode" size="30" placeholder="metricCode"  autocomplete="on"></td>
+			</tr>
+            <tr><td style="color:red;" id = "alert6"></td> </tr>
+			<tr>
+				<td align="left">Metric Value <b>:</b></td>
+				<td width="60%"><input type ="text" id="metricvalue" size="30" placeholder="metricvalue" autocomplete="on"></td>
+			</tr>	
+            <tr><td style="color:red;" id = "alert7"></td> </tr>
+			<tr>
+				<td align="left">Detection Time <b>:</b></td>
+				<td width="60"><input type="text" id="detection" size="30" placeholder="detectionTime" autocomplete="on"></td>
+			</tr>	
+		</table> <br>
+	</div>
+	
+	<div>
+			<button id="sendmetrics">Send Metrics</button> <br> <br>
+
+			<h4>MetricResponse</h4>
+			&nbsp; &nbsp;<textarea id="MetricResponse" rows="7" cols="57"></textarea><br> <br>
+			&nbsp; <button id="save">Save Response</button>
+			<button id="AssetMetricfiddle">JSFiddle</button>  <br> <br>
+	</div>
+
+    <footer>
+            <img src="icons/footer_bg.png" width="1" height="10" alt="footer">
+    </footer>
+    </div>
+ </body>
+
+<script>
+	$("#optional").hide();
+	$(document).on('click','.toggle', function() {
+		$(this).toggleClass('toggle-selected');
+		$("#optional").toggle();
+	});
+
+	
+	$(document).ready(function() {
+		$("#registerAsset").click(function (){
+			try{
+				var registerMsg=buildRegisterMsg($("#apiKey").val(),$("#SrNo").val(),$("#assetname").val(),$("#assettype").val());
+				var url=$("#AgentURL").val();
+				var u=url+registerURL;
+				if(url == "")
+                   document.getElementById("alert").innerHTML = "Please Provide URL";
+				else 
+					url=$("#AgentURL").val();
+				var jqxhr=$.post(url + registerURL,JSON.stringify(registerMsg));
+				jqxhr.done(function(metricResponseJSON,status,jqxhr){
+					$("#agentResponse").val(jqxhr.responseText +" " + "HTTP-Response : " +jqxhr.status);
+					$("#assetlogin").val(metricResponseJSON.result.assetLogin);
+				});
+				jqxhr.fail(function(jqxhr, textStatus, errorThrown){
+					$("#agentResponse").val(errorThrown);
+					document.getElementById('agentResponse').value=
+						"url:\t\t" +u + "\r\n" +
+						"error:\t" +errorThrown + "\r\n" +
+						"status:\t" +jqxhr.status + "\r\n";
+				});
+			}
+			catch(err){
+				logMessage("ERROR", err);
+				$("#agentResponse").val(err);
+			}
+		});
+			$("#save").click(function (){
+				saveAsFile();			
+			});
+		
+		$("#sendmetrics").click(function(){
+			try{
+				if($("#assetlogin").val() == "")
+					document.getElementById("alert5").innerHTML = "Please Provide Asset Login";
+					
+				if($("#MetricURL").val() == "")
+					document.getElementById("alert4").innerHTML = "Please Provide URL";
+					
+				validateMetricValue($("#metriccode").val(),$("#metricvalue").val());
+				var assetMetricMsgs=[];
+				addMetricValue(assetMetricMsgs,$("#metriccode").val(),$("#metricvalue").val(),null);
+				
+				var p=$("#MetricURL").val() + metricUrl;
+				
+				var jqxhr=$.ajax({
+					type : "POST",
+					url : $("#MetricURL").val() + metricUrl, 
+					data : JSON.stringify(assetMetricMsgs),
+					beforeSend: function (xhr) {
+						xhr.setRequestHeader ("Authorization", "Basic " + btoa($("#assetlogin").val() + ":"));
+					}
+				});
+				jqxhr.done( function(metricResponseJSON, status,jqxhr ) {
+					$("#MetricResponse").val(jqxhr.responseText);				
+				});	
+				
+				jqxhr.fail (function(jqxhr, textStatus, errorThrown){
+					document.getElementById("MetricResponse").value=
+					"url : \t\t" +p+ "\r\n"+
+					"error : \t" +errorThrown + "\r\n"+
+					"status : \t" +jqxhr.status;
+				});
+			}
+			catch(err){
+				logMessage("ERROR", err);
+				$("#MetricResponse").val(err);
+			}
+			return false;
+		});
+	});
+	           $("#AssetMetricfiddle").click(function(){
+					goToURL1();
+				});
+				
+				$("#Registerfiddle").click(function(){
+					goToURL();
+				});
+</script>
+</html>

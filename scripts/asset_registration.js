@@ -1,4 +1,4 @@
-var registerURL = "/agentapi/register";
+var registerURL = "/agentapi/registration";
 
 function buildRegisterMsg(apiKey,srNo,assetName,assetTypeCode){
     var registerMsg = {};
